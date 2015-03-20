@@ -38,7 +38,8 @@
                 android:layout_gravity="fill"
                 android:layout_columnWeight="1"
                 android:textSize="40dp"
-                android:text="+2min"/>
+                android:id="@+id/txtTime"
+                android:text="..."/>
         </GridLayout>
 
         <GridLayout
@@ -58,7 +59,8 @@
                 android:layout_gravity="fill"
                 android:layout_columnWeight="1"
                 android:textSize="40dp"
-                android:text="-2%"/>
+                android:id="@+id/txtFuel"
+                android:text="..."/>
         </GridLayout>
 
         <GridLayout
@@ -78,7 +80,8 @@
                 android:layout_gravity="fill"
                 android:layout_columnWeight="1"
                 android:textSize="40dp"
-                android:text="2.2km"/>
+                android:id="@+id/txtDistance"
+                android:text="..."/>
         </GridLayout>
 
     </GridLayout>
