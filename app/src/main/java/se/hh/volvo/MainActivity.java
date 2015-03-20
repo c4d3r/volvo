@@ -1,48 +1,21 @@
 package se.hh.volvo;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 public class MainActivity extends Activity {
 
 
-    private Button btnPlan;
-    private Button btnSettings;
-    private Button btnSummary;
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+        if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction()
+                    .add(R.id.fragment_main, new MainFragment())
+                    .commit();
+        }
 
-        btnPlan = (Button)findViewById(R.id.btn_plan);
-        btnSettings = (Button)findViewById(R.id.btn_settings);
-        btnSummary = (Button)findViewById(R.id.btn_summary);
-
-        btnPlan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), PlanActivity.class));
-            }
-        });
-
-        btnSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), PreferenceActivity.class));
-            }
-        });
-
-        btnSummary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), SummaryActivity.class));
-            }
-        });
     }
 
     @Override
@@ -56,5 +29,4 @@ public class MainActivity extends Activity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
-
 }

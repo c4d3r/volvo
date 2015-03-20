@@ -8,6 +8,9 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.util.Log;
+
+import java.util.Arrays;
 
 /**
  * Created by Maxim on 20/03/2015.
@@ -16,16 +19,16 @@ public class RoadProvider extends ContentProvider
 {
     private static final String TAG = RoadProvider.class.getSimpleName();
 
-    private static final int TOPICS = 100;
-    private static final int TOPIC_ID = 101;
+    private static final int ROADS = 100;
+    private static final int ROAD_ID = 101;
 
     private static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = RoadContract.CONTENT_AUTHORITY;
 
         // voor elk type URI dat we willen toevoegen creeeren we een code
-        matcher.addURI(authority, RoadContract.PATH_ROAD, TOPICS);
-        matcher.addURI(authority, RoadContract.PATH_ROAD + "/#", TOPIC_ID);
+        matcher.addURI(authority, RoadContract.PATH_ROAD, ROADS);
+        matcher.addURI(authority, RoadContract.PATH_ROAD + "/#", ROAD_ID);
 
         return matcher;
     }
@@ -50,7 +53,7 @@ public class RoadProvider extends ContentProvider
         switch(sUriMatcher.match(uri))
         {
             // "topic/*"
-            case TOPIC_ID:
+            case ROAD_ID:
             {
                 retCursor = mDbHelper.getReadableDatabase().query(
                         RoadContract.RoadEntry.TABLE_NAME,
@@ -65,7 +68,7 @@ public class RoadProvider extends ContentProvider
             }
 
             // "topic"
-            case TOPICS:
+            case ROADS:
             {
                 retCursor = mDbHelper.getReadableDatabase().query(
                         RoadContract.RoadEntry.TABLE_NAME,
@@ -96,9 +99,9 @@ public class RoadProvider extends ContentProvider
     public String getType(Uri uri) {
         final int match = sUriMatcher.match(uri);
         switch (match) {
-            case TOPIC_ID:
+            case ROAD_ID:
                 return RoadContract.RoadEntry.CONTENT_TOPIC_TYPE;
-            case TOPICS:
+            case ROADS:
                 return RoadContract.RoadEntry.CONTENT_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -113,7 +116,7 @@ public class RoadProvider extends ContentProvider
         Uri returnUri;
 
         switch (match) {
-            case TOPICS: {
+            case ROADS: {
                 long _id = db.insert(RoadContract.RoadEntry.TABLE_NAME, null, values);
                 if (_id > 0)
                     returnUri = RoadContract.RoadEntry.buildTopicUri(_id);
@@ -135,7 +138,7 @@ public class RoadProvider extends ContentProvider
         int rowsDeleted = 0;
 
         switch (match) {
-            case TOPICS: {
+            case ROADS: {
                 rowsDeleted = db.delete(RoadContract.RoadEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             }
@@ -158,7 +161,7 @@ public class RoadProvider extends ContentProvider
         int rowsUpdated;
 
         switch (match) {
-            case TOPICS: {
+            case ROADS: {
                 rowsUpdated = db.update(RoadContract.RoadEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             }
@@ -179,12 +182,14 @@ public class RoadProvider extends ContentProvider
         final SQLiteDatabase db = mDbHelper.getWritableDatabase();
         final int match = sUriMatcher.match(uri);
         switch (match) {
-            case TOPICS:
+            case ROADS:
                 db.beginTransaction();
                 int returnCount = 0;
                 try
                 {
+                    Log.d(TAG, Arrays.deepToString(values));
                     for(ContentValues value : values) {
+
                         long _id = db.insert(RoadContract.RoadEntry.TABLE_NAME, null, value);
                         if(-1 != _id) {
                             returnCount++;

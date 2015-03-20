@@ -18,7 +18,7 @@ public class RoadContract
     // Gebruik CONTENT_AUTHORITY om de basis van alle URI's te maken
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
-    public static final String PATH_ROAD = "road";
+    public static final String PATH_ROAD = "roads";
 
     public static final class RoadEntry implements BaseColumns
     {
@@ -30,7 +30,7 @@ public class RoadContract
         public static final String CONTENT_TOPIC_TYPE =
                 "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + PATH_ROAD;
 
-        public static final String TABLE_NAME = "topic";
+        public static final String TABLE_NAME = "road";
 
         /* TOPICS */
         public static final String COLUMN_LAT      = "lat";
