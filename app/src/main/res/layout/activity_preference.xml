@@ -12,32 +12,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
             android:text="Please choose your preference"
-            android:textSize="40dp"/>
+            android:textSize="60dp"/>
 
         <Button
-            android:layout_width="250dp"
-            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="800dp"
+            android:layout_height="70dp"
             android:layout_gravity="center_horizontal"
-            android:text="Time to next stop"/>
+            android:text="Time to next stop"
+            android:textSize="35dp"/>
 
         <Button
-            android:layout_width="250dp"
-            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="800dp"
+            android:layout_height="70dp"
             android:layout_gravity="center_horizontal"
-            android:text="Fuel efficientie"/>
+            android:text="Fuel efficiency"
+            android:textSize="35dp"/>
 
         <Button
-            android:layout_width="250dp"
-            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="800dp"
+            android:layout_height="70dp"
             android:layout_gravity="center_horizontal"
-            android:text="ETA"/>
+            android:text="Reach destination on time"
+            android:textSize="35dp"/>
 
     </LinearLayout>
 
